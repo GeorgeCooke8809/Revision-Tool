@@ -1,3 +1,4 @@
+from random import randint
 import sqlite3
 from tkinter import *
 import ctypes
@@ -199,7 +200,7 @@ def clear_page():
 def computer_science_papers(): # select which paper of the computer science course to study
     global papers_main_f, subject
 
-    subject = "Computer Science"
+    subject = "ComputerScience"
 
     select.title("Select Paper")
 
@@ -266,7 +267,7 @@ def computer_science_papers(): # select which paper of the computer science cour
 
     paper_2 = Button(papers_main_f,
                   text = "PAPER 2",
-                  command = inop,
+                  command = computer_science_paper_2,
                   font = (Font_1, 25, "bold"),
                   background = Contrast,
                   fg = "White",
@@ -344,7 +345,7 @@ def computer_science_paper_1():
 
     topic_1 = Button(topics_f,
                   text = "1.1 - SYSTEMS ARCHITECTURE",
-                  command = inop,
+                  command = lambda: questions(1.1),
                   font = (Font_1, 25, "bold"),
                   background = Contrast,
                   fg = "White",
@@ -357,7 +358,7 @@ def computer_science_paper_1():
 
     topic_2 = Button(topics_f,
                   text = "1.2 - MEMORY & STORAGE",
-                  command = inop,
+                  command = lambda: questions(1.2),
                   font = (Font_1, 25, "bold"),
                   background = Contrast,
                   fg = "White",
@@ -370,7 +371,7 @@ def computer_science_paper_1():
 
     topic_3 = Button(topics_f,
                   text = "1.3 - COMPUTER NETWORKS, CONTROLS & PROTOCOLS",
-                  command = inop,
+                  command = lambda: questions(1.3),
                   font = (Font_1, 25, "bold"),
                   background = Contrast,
                   fg = "White",
@@ -383,7 +384,7 @@ def computer_science_paper_1():
 
     topic_4 = Button(topics_f,
                   text = "1.4 - NETWORK SECURITY",
-                  command = inop,
+                  command = lambda: questions(1.4),
                   font = (Font_1, 25, "bold"),
                   background = Contrast,
                   fg = "White",
@@ -396,7 +397,7 @@ def computer_science_paper_1():
 
     topic_5 = Button(topics_f,
               text = "1.5 - SYSTEMS SOFTWARE",
-              command = inop,
+              command = lambda: questions(1.5),
               font = (Font_1, 25, "bold"),
               background = Contrast,
               fg = "White",
@@ -409,7 +410,7 @@ def computer_science_paper_1():
 
     topic_6 = Button(topics_f,
               text = "1.6 - ETHICAL, LEGAL, CULTURAL AND ENVIRONMENTAL ASPECTS",
-              command = questions(1.6),
+              command = lambda: questions(1.6),
               font = (Font_1, 25, "bold"),
               background = Contrast,
               fg = "White",
@@ -423,11 +424,291 @@ def computer_science_paper_1():
     topics_f.grid(row = 2, column = 0, columnspan = 5, sticky = N+E+S+W)
     topics_main_f.pack(fill = "both", expand = True)
     select_window_frame.pack(fill = "both", expand = True)
+
+def computer_science_paper_2():
+    global topics_main_f
+
+    select.title("Select Topic")
+
+    clear_page()
+
+    topics_main_f = Frame(select_window_frame)
+    topics_main_f.rowconfigure(0, weight = 1, minsize = 75)
+    topics_main_f.rowconfigure(1, weight = 1, minsize = 75)
+    topics_main_f.rowconfigure(2, weight = 1000)
+
+    topics_main_f.columnconfigure(0, weight = 1)
+    topics_main_f.columnconfigure(1, weight = 1)
+    topics_main_f.columnconfigure(2, weight = 1)
+    topics_main_f.columnconfigure(3, weight = 1)
+    topics_main_f.columnconfigure(4, weight = 1)
+
+    back = Button(topics_main_f,
+                  text = "<- BACK",
+                  command = computer_science_papers,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2"
+                  ).grid(row = 0, column = 0, sticky = N+E+S+W, pady = 10, padx = 10) #button to return to subjects page
+
+    title = Label(topics_main_f,
+                  text = "Select Topic:",
+                  font = (Font_1, 65, "bold"),
+                  anchor = "w",
+                  padx = 10,
+                  wrap = True,
+                  wraplength = 1000,
+                  justify = "left"
+                  ).grid(row = 1, column = 0, columnspan = 5, sticky = N+E+S+W)
+
+    topics_f = Frame(topics_main_f)
+    topics_f.rowconfigure(0, weight = 1, minsize = 125)
+    topics_f.rowconfigure(1, weight = 1, minsize = 125)
+    topics_f.rowconfigure(2, weight = 1, minsize = 125)
+    topics_f.rowconfigure(3, weight = 1, minsize = 125)
+    topics_f.rowconfigure(4, weight = 1, minsize = 125)
+    topics_f.rowconfigure(5, weight = 1, minsize = 125)
+
+    topics_f.columnconfigure(0, weight = 1, minsize = 707)
+    topics_f.columnconfigure(1, weight = 1, minsize = 707)
+
+    all_topics = Button(topics_f,
+                  text = "ALL",
+                  command = inop,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  ).grid(row = 0, column = 0, columnspan = 2, sticky = N+E+S+W, pady = 5, padx = 10)
+
+    topic_1 = Button(topics_f,
+                  text = "2.1 - ALGORITHMS",
+                  command = lambda: questions(2.1),
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 1, column = 0, sticky = N+E+S+W, pady = 5, padx = 10)
+
+    topic_2 = Button(topics_f,
+                  text = "2.2 - PROGRAMMING FUNDAMENTALS",
+                  command = lambda: questions(2.2),
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 1, column = 1, sticky = N+E+S+W, pady = 5, padx = 10)
+
+    topic_3 = Button(topics_f,
+                  text = "2.3 - PRODUCING ROBUST PROGRAMS",
+                  command = lambda: questions(2.3),
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 2, column = 0, sticky = N+E+S+W, pady = 5, padx = 10)
+
+    topic_4 = Button(topics_f,
+                  text = "2.4 BOOLEAN LOGIC",
+                  command = lambda: questions(2.4),
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 2, column = 1, sticky = N+E+S+W, pady = 5, padx = 10)
+
+    topic_5 = Button(topics_f,
+              text = "2.5 - PROGRAMMING LANGUAGES & IDES",
+              command = lambda: questions(2.5),
+              font = (Font_1, 25, "bold"),
+              background = Contrast,
+              fg = "White",
+              activebackground = Contrast_Light,
+              pady = 10,
+              border = 0,
+              cursor = "hand2",
+              wraplength = 700
+              ).grid(row = 3, column = 0, sticky = N+E+S+W, pady = 5, padx = 10)
+
+    topics_f.grid(row = 2, column = 0, columnspan = 5, sticky = N+E+S+W)
+    topics_main_f.pack(fill = "both", expand = True)
+    select_window_frame.pack(fill = "both", expand = True)
     
 def questions(topic):
-    global subject
+    global subject, entry, answer, box, question, question_frame, question_window, topic_q
 
 
+    select.destroy()
+
+    question_window = Tk()
+    question_window.geometry("1190x400")
+    question_window.title("Questions")
+    question_window.resizable(width = False, height = False)
+
+    data = sqlite3.connect("Questions.db")
+    cursor = data.cursor()
+
+    cursor.execute("SELECT * FROM %s where Topic = %s" % (subject, topic))
+    question_options = cursor.fetchall()
+    question_number = randint(0,(len(question_options)-1))
+
+    question_string = question_options[question_number]
+    topic_q = question_string[0]
+    paper = question_string[1]
+    question = question_string[2]
+    answer = question_string[3]
+
+    question_frame = Frame(question_window)
+
+    question_frame.rowconfigure(0, weight = 1, minsize = 50)
+    question_frame.rowconfigure(1, weight = 1, minsize = 150)
+    question_frame.rowconfigure(2, weight = 1, minsize = 75)
+    question_frame.rowconfigure(3, weight = 1, minsize = 75)
+
+    top_string = str(topic_q) + " (" + str(subject) + " - " + str(paper) + ")"
+    top_string = Label(question_frame,
+                      text = top_string,
+                      font = (Font_2, 25, "italic"),
+                      anchor = "w",
+                      padx = 10,
+                      wrap = True,
+                      wraplength = 1000,
+                      justify = "left"
+                      ).grid(row = 0, column = 0, sticky = N+E+S+W)
+
+    question_label = Label(question_frame,
+                      text = question,
+                      font = (Font_1, 35, "bold"),
+                      anchor = "nw",
+                      padx = 10,
+                      wrap = True,
+                      wraplength = 1000,
+                      justify = "left"
+                      ).grid(row = 1, column = 0, sticky = N+E+S+W)
+
+    box = Entry(question_frame,
+                  font = (Font_1, 30),
+                  width = 55,
+                  justify = "center",
+                  bg = Contrast_Light,
+                  border = 0
+                  )
+    box.grid(row = 2, column = 0, sticky = N+E+S+W)
+
+    submit = Button(question_frame,
+                  text = "SUBMIT",
+                  command = submit_command,
+                  font = (Font_1, 30, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 3, column = 0, sticky = N+E+S+W)
+
+    question_frame.pack(fill = "both", expand = "true")
+    question_window.mainloop()
+
+def submit_command():
+    guess = box.get()
+
+    if guess.upper() == answer.upper():
+        question_label = Label(question_frame,
+                      text = question,
+                      font = (Font_1, 35, "bold"),
+                      fg = "Green",
+                      anchor = "nw",
+                      padx = 10,
+                      wrap = True,
+                      wraplength = 1000,
+                      justify = "left"
+                      ).grid(row = 1, column = 0, sticky = N+E+S+W)
+        question_frame.pack_forget()
+        question_frame.pack(fill = "both", expand = "true")
+
+        new_question(topic_q)
+
+def new_question(topic):
+    data = sqlite3.connect("Questions.db")
+    cursor = data.cursor()
+
+    cursor.execute("SELECT * FROM %s where Topic = %s" % (subject, topic))
+    question_options = cursor.fetchall()
+    question_number = randint(0,(len(question_options)-1))
+
+    question_string = question_options[question_number]
+    topic = question_string[0]
+    paper = question_string[1]
+    question = question_string[2]
+    answer = question_string[3]
+
+    top_string = str(topic) + " (" + str(subject) + " - " + str(paper) + ")"
+    top_string = Label(question_frame,
+                      text = top_string,
+                      font = (Font_2, 25, "italic"),
+                      anchor = "w",
+                      padx = 10,
+                      wrap = True,
+                      wraplength = 1000,
+                      justify = "left"
+                      ).grid(row = 0, column = 0, sticky = N+E+S+W)
+
+    question_label = Label(question_frame,
+                      text = question,
+                      font = (Font_1, 35, "bold"),
+                      anchor = "nw",
+                      padx = 10,
+                      wrap = True,
+                      wraplength = 1000,
+                      justify = "left"
+                      ).grid(row = 1, column = 0, sticky = N+E+S+W)
+
+    box = Entry(question_frame,
+                  font = (Font_1, 30),
+                  width = 55,
+                  justify = "center",
+                  bg = Contrast_Light,
+                  border = 0
+                  )
+    box.grid(row = 2, column = 0, sticky = N+E+S+W)
+
+    submit = Button(question_frame,
+                  text = "SUBMIT",
+                  command = submit_command,
+                  font = (Font_1, 30, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 3, column = 0, sticky = N+E+S+W)
+
+    question_frame.pack(fill = "both", expand = "true")
 
 
 select_subject() #decides starting page
