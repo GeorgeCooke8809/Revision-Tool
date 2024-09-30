@@ -23,11 +23,11 @@ def inop(): #for when a button isn't programmed yet
     return ctypes.windll.user32.MessageBoxW(0, "INOP", "INOP", 4)
 
 def select_subject(): #select subject page for going into questions
-    global subjects_main_f, subjects_f,papers_main_f
+    global subjects_main_f, subjects_f,papers_main_f, topics_main_f
 
     clear_page()
 
-    select.title("Select Subject:")
+    select.title("Select Subject")
 
     subjects_main_f = Frame(select_window_frame) #blue frame on canva
     subjects_main_f.rowconfigure(0, weight = 1, minsize = 75)
@@ -44,6 +44,9 @@ def select_subject(): #select subject page for going into questions
 
     papers_main_f = Frame(select_window_frame) #declares the papers main frame for next window so doesn't come as undefined when clearing
     papers_main_f.pack()
+
+    topics_main_f = Frame(select_window_frame)
+    topics_main_f.pack()
 
     back = Button(subjects_main_f,
                   text = "<- BACK",
@@ -189,13 +192,16 @@ def clear_page():
         subjects_main_f.pack_forget()
         subjects_f.pack_forget()
         papers_main_f.pack_forget()
+        topics_main_f.pack_forget()
 
     first_run = first_run + 1
 
 def computer_science_papers(): # select which paper of the computer science course to study
-    global papers_main_f
+    global papers_main_f, subject
 
-    select.title("Select Paper:")
+    subject = "Computer Science"
+
+    select.title("Select Paper")
 
     clear_page()
 
@@ -248,7 +254,7 @@ def computer_science_papers(): # select which paper of the computer science cour
 
     paper_1 = Button(papers_main_f,
                   text = "PAPER 1",
-                  command = inop,
+                  command = computer_science_paper_1,
                   font = (Font_1, 25, "bold"),
                   background = Contrast,
                   fg = "White",
@@ -272,6 +278,157 @@ def computer_science_papers(): # select which paper of the computer science cour
 
     papers_main_f.pack(fill = "both", expand = True)
     select_window_frame.pack(fill = "both", expand = True)
+
+def computer_science_paper_1():
+    global topics_main_f
+
+    select.title("Select Topic")
+
+    clear_page()
+
+    topics_main_f = Frame(select_window_frame)
+    topics_main_f.rowconfigure(0, weight = 1, minsize = 75)
+    topics_main_f.rowconfigure(1, weight = 1, minsize = 75)
+    topics_main_f.rowconfigure(2, weight = 1000)
+
+    topics_main_f.columnconfigure(0, weight = 1)
+    topics_main_f.columnconfigure(1, weight = 1)
+    topics_main_f.columnconfigure(2, weight = 1)
+    topics_main_f.columnconfigure(3, weight = 1)
+    topics_main_f.columnconfigure(4, weight = 1)
+
+    back = Button(topics_main_f,
+                  text = "<- BACK",
+                  command = computer_science_papers,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2"
+                  ).grid(row = 0, column = 0, sticky = N+E+S+W, pady = 10, padx = 10) #button to return to subjects page
+
+    title = Label(topics_main_f,
+                  text = "Select Topic:",
+                  font = (Font_1, 65, "bold"),
+                  anchor = "w",
+                  padx = 10,
+                  wrap = True,
+                  wraplength = 1000,
+                  justify = "left"
+                  ).grid(row = 1, column = 0, columnspan = 5, sticky = N+E+S+W)
+
+    topics_f = Frame(topics_main_f)
+    topics_f.rowconfigure(0, weight = 1, minsize = 125)
+    topics_f.rowconfigure(1, weight = 1, minsize = 125)
+    topics_f.rowconfigure(2, weight = 1, minsize = 125)
+    topics_f.rowconfigure(3, weight = 1, minsize = 125)
+    topics_f.rowconfigure(4, weight = 1, minsize = 125)
+    topics_f.rowconfigure(5, weight = 1, minsize = 125)
+
+    topics_f.columnconfigure(0, weight = 1, minsize = 707)
+    topics_f.columnconfigure(1, weight = 1, minsize = 707)
+
+    all_topics = Button(topics_f,
+                  text = "ALL",
+                  command = inop,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  ).grid(row = 0, column = 0, columnspan = 2, sticky = N+E+S+W, pady = 10, padx = 10)
+
+    topic_1 = Button(topics_f,
+                  text = "1.1 - SYSTEMS ARCHITECTURE",
+                  command = inop,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 1, column = 0, sticky = N+E+S+W, pady = 10, padx = 10)
+
+    topic_2 = Button(topics_f,
+                  text = "1.2 - MEMORY & STORAGE",
+                  command = inop,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 1, column = 1, sticky = N+E+S+W, pady = 10, padx = 10)
+
+    topic_3 = Button(topics_f,
+                  text = "1.3 - COMPUTER NETWORKS, CONTROLS & PROTOCOLS",
+                  command = inop,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 2, column = 0, sticky = N+E+S+W, pady = 10, padx = 10)
+
+    topic_4 = Button(topics_f,
+                  text = "1.4 - NETWORK SECURITY",
+                  command = inop,
+                  font = (Font_1, 25, "bold"),
+                  background = Contrast,
+                  fg = "White",
+                  activebackground = Contrast_Light,
+                  pady = 10,
+                  border = 0,
+                  cursor = "hand2",
+                  wraplength = 700
+                  ).grid(row = 2, column = 1, sticky = N+E+S+W, pady = 10, padx = 10)
+
+    topic_5 = Button(topics_f,
+              text = "1.5 - SYSTEMS SOFTWARE",
+              command = inop,
+              font = (Font_1, 25, "bold"),
+              background = Contrast,
+              fg = "White",
+              activebackground = Contrast_Light,
+              pady = 10,
+              border = 0,
+              cursor = "hand2",
+              wraplength = 700
+              ).grid(row = 3, column = 0, sticky = N+E+S+W, pady = 10, padx = 10)
+
+    topic_6 = Button(topics_f,
+              text = "1.6 - ETHICAL, LEGAL, CULTURAL AND ENVIRONMENTAL ASPECTS",
+              command = questions(1.6),
+              font = (Font_1, 25, "bold"),
+              background = Contrast,
+              fg = "White",
+              activebackground = Contrast_Light,
+              pady = 10,
+              border = 0,
+              cursor = "hand2",
+              wraplength = 700
+              ).grid(row = 3, column = 1, sticky = N+E+S+W, pady = 10, padx = 10)
+
+    topics_f.grid(row = 2, column = 0, columnspan = 5, sticky = N+E+S+W)
+    topics_main_f.pack(fill = "both", expand = True)
+    select_window_frame.pack(fill = "both", expand = True)
+    
+def questions(topic):
+    global subject
+
+
+
 
 select_subject() #decides starting page
 select.mainloop()
