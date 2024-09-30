@@ -2,6 +2,12 @@ from random import randint
 import sqlite3
 from tkinter import *
 import ctypes
+import pygame
+
+pygame.init()
+
+correct = pygame.mixer.Sound("Correct.mp3")
+incorrect = pygame.mixer.Sound("Incorrect.mp3")
 
 #set up selction window
 select = Tk()
@@ -15,6 +21,8 @@ Font_2 = "Tw Cen MT"
 Background = "White"
 Contrast = "#01104d"
 Contrast_Light = "#bfd2ff"
+
+guess_no = 0
 
 select_window_frame = Frame(select) # frame that everything is put into to make clearing simpler
 
@@ -618,6 +626,8 @@ def questions(topic):
                   )
     box.grid(row = 2, column = 0, sticky = N+E+S+W)
 
+    box.bind("<Return>", submit_command)
+
     submit = Button(question_frame,
                   text = "SUBMIT",
                   command = submit_command,
@@ -633,7 +643,8 @@ def questions(topic):
     question_frame.pack(fill = "both", expand = "true")
     question_window.mainloop()
 
-def submit_command():
+def submit_command(event=None):
+    global guess_no
     guess = box.get()
 
     if guess.upper() == answer.upper():
@@ -649,8 +660,16 @@ def submit_command():
                       ).grid(row = 1, column = 0, sticky = N+E+S+W)
         question_frame.pack_forget()
         question_frame.pack(fill = "both", expand = "true")
-
+        guess_no = 0
+        correct.play()
         new_question(topic_q)
+    else:
+        incorrect.play()
+        guess_no = guess_no + 1
+
+        if guess_no == 3:
+            new_question(topic_q)
+            guess_no = 0
 
 def new_question(topic):
     data = sqlite3.connect("Questions.db")
@@ -665,6 +684,8 @@ def new_question(topic):
     paper = question_string[1]
     question = question_string[2]
     answer = question_string[3]
+
+    print(question_string)
 
     top_string = str(topic) + " (" + str(subject) + " - " + str(paper) + ")"
     top_string = Label(question_frame,
@@ -687,15 +708,6 @@ def new_question(topic):
                       justify = "left"
                       ).grid(row = 1, column = 0, sticky = N+E+S+W)
 
-    box = Entry(question_frame,
-                  font = (Font_1, 30),
-                  width = 55,
-                  justify = "center",
-                  bg = Contrast_Light,
-                  border = 0
-                  )
-    box.grid(row = 2, column = 0, sticky = N+E+S+W)
-
     submit = Button(question_frame,
                   text = "SUBMIT",
                   command = submit_command,
@@ -707,6 +719,8 @@ def new_question(topic):
                   cursor = "hand2",
                   wraplength = 700
                   ).grid(row = 3, column = 0, sticky = N+E+S+W)
+
+    box.delete(0,END)
 
     question_frame.pack(fill = "both", expand = "true")
 
