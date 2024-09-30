@@ -15,9 +15,9 @@ Background = "White"
 Contrast = "#01104d"
 Contrast_Light = "#bfd2ff"
 
-select_window_frame = Frame(select)
+select_window_frame = Frame(select) # frame that everything is put into to make clearing simpler
 
-first_run = 0
+first_run = 0 # checks if its the first time going back so that it doesn't break
 
 def inop(): #for when a button isn't programmed yet
     return ctypes.windll.user32.MessageBoxW(0, "INOP", "INOP", 4)
@@ -42,7 +42,7 @@ def select_subject(): #select subject page for going into questions
     subjects_main_f.columnconfigure(3, weight = 1)
     subjects_main_f.columnconfigure(4, weight = 1)
 
-    papers_main_f = Frame(select_window_frame)
+    papers_main_f = Frame(select_window_frame) #declares the papers main frame for next window so doesn't come as undefined when clearing
     papers_main_f.pack()
 
     back = Button(subjects_main_f,
@@ -192,7 +192,7 @@ def clear_page():
 
     first_run = first_run + 1
 
-def computer_science_papers():
+def computer_science_papers(): # select which paper of the computer science course to study
     global papers_main_f
 
     select.title("Select Paper:")
@@ -222,7 +222,7 @@ def computer_science_papers():
                   pady = 10,
                   border = 0,
                   cursor = "hand2"
-                  ).grid(row = 0, column = 0, sticky = N+E+S+W, pady = 10, padx = 10)
+                  ).grid(row = 0, column = 0, sticky = N+E+S+W, pady = 10, padx = 10) #button to return to subjects page
 
     title = Label(papers_main_f,
                   text = "Select Paper:",
@@ -273,5 +273,5 @@ def computer_science_papers():
     papers_main_f.pack(fill = "both", expand = True)
     select_window_frame.pack(fill = "both", expand = True)
 
-select_subject()
+select_subject() #decides starting page
 select.mainloop()
